@@ -1,0 +1,15 @@
+{
+  "name": "websocket-proxy-testing-tool",
+  "version": "1.0.0",
+  "description": "websocket-proxy-testing-tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gingermanymph/websocket-proxy-testing-tool.git"
+  },
+  "author": "gingermanymph",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gingermanymph/websocket-proxy-testing-tool/issues"
+  },
+  "homepage": "https://github.com/gingermanymph/websocket-proxy-testing-tool#readme"
+}
