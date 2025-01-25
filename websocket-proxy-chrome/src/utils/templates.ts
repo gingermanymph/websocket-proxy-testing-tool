@@ -1,4 +1,4 @@
-export const defaultWspTemplate = `/** This code will runs each time before sending websocket message 
+export const defaultWSPTemplate = `/** This code will runs each time before sending websocket message 
 *  In this code context available two variables \`message\` and \`target\`
 *  @target - contains current WebSocket host
 *  @message - contains current data
