@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "types": [
+            "chrome"
+        ],
+        "outDir": "./dist"
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

@@ -1,21 +1,24 @@
 {
   "name": "websocket-proxy-chrome",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "live": "vite build --watch"
   },
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
     "vite-plugin-static-copy": "^2.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/chrome": "^0.0.299",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
@@ -25,5 +28,15 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "vite": "^6.0.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gingermanymph/websocket-proxy-testing-tool.git"
+  },
+  "author": "gingermanymph",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gingermanymph/websocket-proxy-testing-tool/issues"
+  },
+  "homepage": "https://github.com/gingermanymph/websocket-proxy-testing-tool#readme"
 }
