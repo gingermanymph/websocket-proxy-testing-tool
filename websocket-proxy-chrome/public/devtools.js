@@ -1,0 +1,1 @@
+chrome.devtools.panels.create("WebSocket Proxy", "", "/index.html");

@@ -1,0 +1,43 @@
+{
+    "name": "WebSocket Proxy",
+    "version": "1.0.0",
+    "permissions": [
+        "scripting",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "wsproxy.js"
+            ],
+            "world": "MAIN",
+            "run_at": "document_start",
+            "match_about_blank": true,
+            "all_frames": true
+        },
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_start",
+            "all_frames": true
+        }
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "devtools_page": "devtools.html",
+    "manifest_version": 3
+}
