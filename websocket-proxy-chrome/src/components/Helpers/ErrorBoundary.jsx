@@ -20,6 +20,7 @@ class ErrorBoundary extends Component {
             <button onClick={() => reloadInspectedWindow()}>Page reload</button>
             <button onClick={() => window.location.reload()}>Frame reload</button>
             <button onClick={() => storeManager.clear()}>Clear storage</button>
+            <button onClick={() => console.clear()}>Clear logs</button>
         </div>
     }
 
