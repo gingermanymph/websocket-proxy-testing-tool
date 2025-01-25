@@ -1,9 +1,9 @@
 import React from 'react'
-
-const WSAbout = () => {
+const WSAbout = ({ className }) => {
     return (
-        <div>WSAbout</div>
+        <div className={className}>
+            WSAbout
+        </div>
     )
 }
-
 export default WSAbout
