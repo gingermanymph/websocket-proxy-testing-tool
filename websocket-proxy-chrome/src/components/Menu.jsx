@@ -25,7 +25,6 @@ const Menu = ({ onSelect, active }) => {
             </div>
             {menuItems.map((item, id) => (
                 <button
-                // w-[30px] h-[30px]
                     className={`min-w-[30px] min-h-[30px] flex justify-center items-center text-light ${isSelected === item.type && 'selected' }`}
                     key={id}
                     onClick={() => {
