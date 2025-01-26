@@ -12,15 +12,15 @@ class ErrorBoundary extends Component {
     }
 
     componentDidCatch(error, info) {
-        console.error("Error caught in ErrorBoundary:", error, info);
+        console.error('Error caught in ErrorBoundary:', error, info);
     }
 
     panel() {
-        return <div className="debugger">
-            <button onClick={() => reloadInspectedWindow()}>Page reload</button>
-            <button onClick={() => window.location.reload()}>Frame reload</button>
-            <button onClick={() => storeManager.clear()}>Clear storage</button>
-            <button onClick={() => console.clear()}>Clear logs</button>
+        return <div className='fixed bottom-2 left-2 bg-black opacity-70 text-white !p-1 rounded z-[9999]'>
+            <button className='!m-0 !mx-2 hover:bg-gray-600' onClick={() => reloadInspectedWindow()}>Page reload</button>
+            <button className='!m-0 !mx-2 hover:bg-gray-600' onClick={() => window.location.reload()}>Frame reload</button>
+            <button className='!m-0 !mx-2 hover:bg-gray-600' onClick={() => storeManager.clear()}>Clear storage</button>
+            <button className='!m-0 !mx-2 hover:bg-gray-600' onClick={() => console.clear()}>Clear logs</button>
         </div>
     }
 
