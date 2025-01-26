@@ -1,6 +1,16 @@
 import React from 'react';
-import {  VscArrowSmallDown, VscArrowSmallUp, VscCircleFilled, VscPassFilled, VscCircleLarge, VscCircleLargeFilled } from 'react-icons/vsc';
+import { VscCircleFilled } from 'react-icons/vsc';
 import { TiArrowUpThick, TiArrowDownThick } from "react-icons/ti";
+
+const getTime = (time) => {
+    return new Intl.DateTimeFormat('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        fractionalSecondDigits: 3,
+        hour12: false,
+    }).format(time);
+};
 
 const getIcon = (type) => {
     switch (type) {
@@ -25,8 +35,7 @@ const MessageLog = ({ message, onClick }) => {
             <div className='flex flex-1 overflow-hidden'>
                 <div className='font-mono truncate'>{message.data}</div>
                 <div className='!ml-auto text-[10px] text-light content-center  border-l border-light !pl-[2px]'>
-                    {message.time}
-                    {/* {new Date(message.time).toLocaleTimeString()} */}
+                    {getTime(message.time)}
                 </div>
             </div>
         </div>
