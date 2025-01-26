@@ -25,7 +25,7 @@ function App() {
     storeManager.get('settings', (storedValue) => {
       if (storedValue) {
         setSettings({ ...settings, ...storedValue });
-        setActiveMenuItem(storedValue.defaultScreen)
+        setActiveMenuItem(storedValue.defaultScreen); //Fix: when reloaded frame defaultScreen is WSProxy
       }
     });
 
@@ -43,24 +43,25 @@ function App() {
   }, [settings]);
 
   return (
-    <>
+    <div className='flex h-screen'>
       <Menu
         onSelect={handleMenuSelection}
         active={activeMenuItem} />
       {/* Decided to manage components by hiding them, not re rendering. Until I learn how to manage it by saving states correctly */}
       {/* {activeMenuItem === 'WSProxy' && <WSProxy settings={settings} setSettings={setSettings} />} */}
-      {/* {activeMenuItem === 'WSClient' && <WSClient defaultJSONTemplate={settings.defaultJSONTemplate} setSettings={setSettings} />} */}
-      <WSProxy
-        defaultWSPTemplate={settings.defaultWSPTemplate}
-        setSettings={setSettings}
-        className={activeMenuItem !== 'WSProxy' ? 'hidden' : 'default'}
-      />
-      <WSClient
-        defaultJSONTemplate={settings.defaultJSONTemplate}
-        setSettings={setSettings}
-        className={activeMenuItem !== 'WSClient' ? 'hidden' : 'default'} />
-      <WSAbout className={activeMenuItem !== 'WSAbout' ? 'hidden' : 'default'} />
-    </>
+      <div className='flex-1 overflow-hidden'>
+        <WSProxy
+          settings={settings}
+          setSettings={setSettings}
+          className={activeMenuItem !== 'WSProxy' ? 'hidden' : ''}
+        />
+        <WSClient
+          settings={settings}
+          setSettings={setSettings}
+          className={activeMenuItem !== 'WSClient' ? 'hidden' : ''} />
+        <WSAbout className={activeMenuItem !== 'WSAbout' ? 'hidden' : ''} />
+      </div>
+    </div>
   )
 }
 
