@@ -8,10 +8,11 @@ const Menu = ({ onSelect, active }) => {
             type: 'WSProxy',
             icon: <VscDebugDisconnect className='h-[21px] w-[21px]'/>
         },
-        {
-            type: 'WSClient',
-            icon: <VscPlug className='h-[21px] w-[21px]'/>
-        },
+        // TODO: hidden for the next itteration
+        // {
+        //     type: 'WSClient',
+        //     icon: <VscPlug className='h-[21px] w-[21px]'/>
+        // },
         {
             type: 'WSAbout',
             icon: <VscQuestion className='h-[21px] w-[21px]'/>
