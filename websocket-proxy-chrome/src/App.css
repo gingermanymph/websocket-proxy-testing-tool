@@ -32,6 +32,14 @@ body {
     background-color: var(--light-hover);
 }
 
+.bg-input {
+    background-color: var(--light)
+}
+
+.bg-input:hover {
+    background-color: var(--light)
+}
+
 .bg-ph {
     /* background-color: var(--placeholder); */
 }
@@ -51,13 +59,15 @@ body {
 .border-light {
     border-color: var(--light-hover);
 }
-.bg-s::selection{
+
+.bg-s::selection {
     background-color: #5d5d5d99;
 }
 
-.bg-f:focus{
-    background-color: #3c3c3c;
+.bg-f:focus {
+    background-color: var(--light);
 }
+
 .selected {
     background-color: var(--light-hover);
 }
