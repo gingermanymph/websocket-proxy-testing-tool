@@ -51,3 +51,88 @@ export const storeManager = {
     },
 };
 
+
+// Communication with background.js
+export class AppDevtoolsConnection {
+    appInstance: any;
+    retries: number;
+    maxRetries: number;
+    messageHandler: (message: any) => void;
+    isConnected: boolean;
+
+    constructor(messageHandler, maxRetries = 5) {
+        this.appInstance = null;
+        this.retries = 0;
+        this.maxRetries = maxRetries;
+        this.messageHandler = messageHandler;
+        this.isConnected = false;
+    }
+    
+    connect() {
+        if (this.appInstance && this.isConnected) {
+            console.log('Already connected to background.');
+            return;
+        }
+
+        console.log('Connecting to background...');
+
+        const chromePort = chrome.runtime.connect();
+
+        chromePort.postMessage({
+            appId: chrome.devtools.inspectedWindow.tabId
+        });
+
+        chromePort.onMessage.addListener((message) => {
+            if (typeof this.messageHandler === 'function') {
+                this.messageHandler(message);
+            }
+        });
+
+        chromePort.onDisconnect.addListener(() => {
+            console.warn('AppDevtools Port disconnected. Attempting to reconnect...');
+            this.reconnect();
+        });
+
+        this.appInstance = chromePort;
+        this.isConnected = true;
+
+        console.log('Connected to background.');
+    }
+
+    disconnect() {
+        if (this.appInstance) {
+            this.appInstance.disconnect();
+            this.isConnected = false;
+            console.log('Disconnected from background.');
+        }
+    }
+
+    reconnect() {
+        if (this.retries < this.maxRetries) {
+            const delay = Math.min(1000 * Math.pow(2, this.retries), 10000); // Exponential backoff
+
+            console.log(`Reconnecting in ${delay}ms (Attempt ${this.retries + 1}/${this.maxRetries})`);
+
+            setTimeout(() => {
+                this.retries++;
+                this.connect();
+            }, delay);
+        } else {
+            console.error('Max reconnection attempts reached. Connection failed.');
+        }
+    }
+
+    postMessage(message) {
+        if (this.appInstance && this.isConnected) {
+            try {
+                this.appInstance.postMessage(message);
+            } catch (error) {
+                console.error('Failed to send message:', error);
+            }
+        } else {
+            console.error('Not connected. Cannot send message.');
+            // Try to connect when connection was lost and onDisconnect is not fiered
+            this.connect();
+        }
+    }
+}
