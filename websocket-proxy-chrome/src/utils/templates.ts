@@ -1,13 +1,16 @@
-export const defaultWSPTemplate = `/** This code will runs each time before sending websocket message 
-*  In this code context available two variables \`message\` and \`target\`
-*  @target - contains current WebSocket host
-*  @message - contains current data
+export const defaultWSPTemplate = `/** This code runs before each WebSocket message is sent.
+*  
+*  In this code, the following variables are available:
+*  - \`target\`: The current WebSocket host.
+*  - \`message\`: The data to be sent.
 */
 
-// Skipp host
-if (target === 'wss://example.com/') return message;
+// Skip processing for a specific host
+if (target === 'wss://example.com/') {
+    return message; // Return the original message unchanged
+}
 
-// Modify message
+// Modify the message to uppercase
 message = message.toUpperCase();\n`;
 
 export const defaultJSLiveTemplate = `message = {
