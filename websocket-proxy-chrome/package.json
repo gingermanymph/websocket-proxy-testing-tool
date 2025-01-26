@@ -11,9 +11,16 @@
     "live": "vite build --watch"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-json": "^6.0.1",
+    "@tailwindcss/vite": "^4.0.0",
+    "@uiw/codemirror-theme-material": "^4.23.7",
+    "@uiw/react-codemirror": "^4.23.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
+    "react-resizable-panels": "^2.1.7",
+    "tailwindcss": "^4.0.0",
     "vite-plugin-static-copy": "^2.2.0"
   },
   "devDependencies": {
