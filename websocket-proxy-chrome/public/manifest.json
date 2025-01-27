@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description":"Monitor, log, and modify WebSocket messages in real-time with a powerful proxy and testing tool.",
     "permissions": [
-        "scripting",
+        "activeTab",
         "storage"
     ],
     "background": {
@@ -34,10 +34,6 @@
             "run_at": "document_start",
             "all_frames": true
         }
-    ],
-    "host_permissions": [
-        "http://*/*",
-        "https://*/*"
     ],
     "icons": {
         "16": "icons/i-16.png",
