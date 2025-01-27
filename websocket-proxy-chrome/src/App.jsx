@@ -25,7 +25,7 @@ function App() {
     storeManager.get('settings', (storedValue) => {
       if (storedValue) {
         setSettings({ ...settings, ...storedValue });
-        setActiveMenuItem(storedValue.defaultScreen); //Fix: when reloaded frame defaultScreen is WSProxy
+        setActiveMenuItem(storedValue.defaultScreen);
       }
     });
 
