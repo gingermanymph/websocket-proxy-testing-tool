@@ -33,7 +33,7 @@ const MessageLog = ({ message, onClick }) => {
         >
             {getIcon(message.type)}
             <div className='flex flex-1 overflow-hidden'>
-                <div className='font-mono truncate'>{message.data}</div>
+                <div className='font-mono truncate'>{message.data.text || message.data}</div>
                 <div className='!ml-auto text-[10px] text-light content-center  border-l border-light !pl-[2px]'>
                     {getTime(message.time)}
                 </div>
