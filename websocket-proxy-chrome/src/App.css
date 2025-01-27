@@ -68,6 +68,10 @@ body {
     background-color: var(--light);
 }
 
+.ph::placeholder {
+    color: var(--placeholder);
+}
+
 .selected {
     background-color: var(--light-hover);
 }
