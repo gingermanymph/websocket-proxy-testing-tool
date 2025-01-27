@@ -1,6 +1,7 @@
 {
     "name": "WebSocket Proxy",
     "version": "1.0.0",
+    "description":"Monitor, log, and modify WebSocket messages in real-time with a powerful proxy and testing tool.",
     "permissions": [
         "scripting",
         "storage"
