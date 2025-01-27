@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VscMenu, VscPlug, VscDebugDisconnect, VscQuestion } from 'react-icons/vsc';
 
 
@@ -19,6 +19,11 @@ const Menu = ({ onSelect, active }) => {
         },
     ]
     const [isSelected, setActiveComponent] = useState(active);
+
+    useEffect(()=>{
+        setActiveComponent(active)
+    },[active]);
+    
     return (
         <div className='flex flex-col w-[30px] border-r border-light'>
             <div className='flex justify-center items-center min-h-[26px] border-b border-light '>
