@@ -1,11 +1,8 @@
 import React from 'react'
 
-const WSClient = ({ defaultJSONTemplate, setSettings, className }) => {
+const WSClient = ({ settings, setSettings, className }) => {
     return (
-        <div className={className}>
-            WSClient
-            <pre>defaultJSONTemplate: {defaultJSONTemplate}</pre>
-        </div>
+        <div className={className}></div>
     )
 }
 
