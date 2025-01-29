@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "live": "vite build --watch"
+    "live": "vite build --watch",
+    "zip": "zip -r websocket-proxy.zip dist"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
@@ -21,6 +22,7 @@
     "react-github-btn": "^1.4.0",
     "react-icons": "^5.4.0",
     "react-resizable-panels": "^2.1.7",
+    "react-window": "^1.8.11",
     "tailwindcss": "^4.0.0",
     "vite-plugin-static-copy": "^2.2.0"
   },
