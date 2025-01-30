@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
-import { VscDebugStop, VscRefresh, VscCircleSlash, VscRunAll } from 'react-icons/vsc';
+import { VscDebugStop, VscRefresh, VscCircleSlash, VscRunAll, VscSend } from 'react-icons/vsc';
 import { CodeEditor } from '../CodeEditor';
 import { reloadInspectedWindow, AppDevtoolsConnection } from '../../utils/chromeAPI';
 import MessagesHistory from '../MessagesHistory';
@@ -26,9 +26,9 @@ const WSProxy = ({ settings, setSettings, className }) => {
 
     const [code, setCode] = useState('');
     const [messages, setMessages] = useState([]);
-
     // Removed tmp deletion, need check performance after applying virtuoso
     // useEffect(() => { messages.length >= 10000 && handleClear() }, [messages]);
+    // Results: Was able to collect 40k messages before devtools crashed ...
 
     const [filter, setFilter] = useState('all');
     const [regexFilter, setRegexFilter] = useState('');
@@ -59,7 +59,7 @@ const WSProxy = ({ settings, setSettings, className }) => {
     const handleStop = () => { setIsRunning(false); handleUpdateWSPJS('') }
     const handleReload = () => { reloadInspectedWindow() }
     const handleClear = () => { setMessages([]); setSelectedMessage(null) }
-    const handleMessageOnClick = (message) => { setSelectedMessage(message) }
+    const handleMessageOnClick = useCallback((message) => { setSelectedMessage(message); }, []);
 
     const handleUpdateWSPJS = (value) => {
         const instance = appDevtoolsInstanceRef.current;
