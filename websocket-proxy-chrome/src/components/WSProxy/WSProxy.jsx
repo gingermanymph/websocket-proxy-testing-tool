@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { VscDebugStop, VscRefresh, VscCircleSlash, VscRunAll } from 'react-icons/vsc';
 import { CodeEditor } from '../CodeEditor';
-import MessageLog from '../MessageLog';
-import { reloadInspectedWindow, AppDevtoolsConnection } from '../../utils/chromeAPI'
+import { reloadInspectedWindow, AppDevtoolsConnection } from '../../utils/chromeAPI';
+import MessagesHistory from '../MessagesHistory';
 
 const WSProxy = ({ settings, setSettings, className }) => {
 
@@ -27,11 +27,8 @@ const WSProxy = ({ settings, setSettings, className }) => {
     const [code, setCode] = useState('');
     const [messages, setMessages] = useState([]);
 
-    useEffect(() => {
-        if (messages.length >= 10000) {
-            handleClear();
-        }
-    }, [messages]);
+    // Removed tmp deletion, need check performance after applying virtuoso
+    // useEffect(() => { messages.length >= 10000 && handleClear() }, [messages]);
 
     const [filter, setFilter] = useState('all');
     const [regexFilter, setRegexFilter] = useState('');
@@ -62,6 +59,7 @@ const WSProxy = ({ settings, setSettings, className }) => {
     const handleStop = () => { setIsRunning(false); handleUpdateWSPJS('') }
     const handleReload = () => { reloadInspectedWindow() }
     const handleClear = () => { setMessages([]); setSelectedMessage(null) }
+    const handleMessageOnClick = (message) => { setSelectedMessage(message) }
 
     const handleUpdateWSPJS = (value) => {
         const instance = appDevtoolsInstanceRef.current;
@@ -173,16 +171,7 @@ const WSProxy = ({ settings, setSettings, className }) => {
                         <div className='flex-1'>
                             <PanelGroup direction='vertical'>
                                 <Panel defaultSize={50} minSize={20}>
-                                    <div className='h-full overflow-auto'>
-                                        {!filteredMessages.length && <div className='h-full flex items-center justify-center text-xl text-light-h truncate'>Messages will show up here</div>}
-                                        {filteredMessages.map((message) => (
-                                            <MessageLog
-                                                key={message.time}
-                                                message={message}
-                                                onClick={() => { setSelectedMessage(message) }}
-                                            />
-                                        ))}
-                                    </div>
+                                    <MessagesHistory messages={filteredMessages} messageOnClick={handleMessageOnClick} />
                                 </Panel>
 
                                 <PanelResizeHandle className='h-[1px] bg-light transition-colors' />
