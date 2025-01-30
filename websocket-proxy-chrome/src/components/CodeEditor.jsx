@@ -6,9 +6,9 @@ import { json } from '@codemirror/lang-json';
 export function CodeEditor({ value, onChange, extensions, editable = true }) {
   const beautifyJSON = (jsonString) => {
     try {
-      return JSON.stringify(JSON.parse(jsonString), null, 2) + '\n\n\n';
+      return JSON.stringify(JSON.parse(jsonString), null, 2) + '\n\n\n\n\n\n\n';
     } catch (e) {
-      return jsonString + '\n\n\n';
+      return jsonString + '\n\n\n\n\n\n\n';
     }
   }
 

@@ -1,5 +1,10 @@
 export const reloadInspectedWindow = (args: any) => {
-    return chrome.devtools.inspectedWindow.reload(args);
+    try {
+        return chrome.devtools.inspectedWindow.reload(args);   
+    } catch (error) {
+        console.warn(`This chrome API must be requested from devtools`)
+        return window.location.reload();
+    }
 }
 
 export const storeManager = {
