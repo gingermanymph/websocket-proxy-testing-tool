@@ -1,6 +1,6 @@
 export const reloadInspectedWindow = (args: any) => {
     try {
-        return chrome.devtools.inspectedWindow.reload(args);   
+        return chrome.devtools.inspectedWindow.reload(args);
     } catch (error) {
         console.warn(`This chrome API must be requested from devtools`)
         return window.location.reload();
@@ -72,7 +72,7 @@ export class AppDevtoolsConnection {
         this.messageHandler = messageHandler;
         this.isConnected = false;
     }
-    
+
     connect() {
         if (this.appInstance && this.isConnected) {
             console.log('Already connected to background.');
@@ -100,6 +100,7 @@ export class AppDevtoolsConnection {
 
         this.appInstance = chromePort;
         this.isConnected = true;
+        this.retries = 0;
 
         console.log('Connected to background.');
     }
@@ -108,11 +109,13 @@ export class AppDevtoolsConnection {
         if (this.appInstance) {
             this.appInstance.disconnect();
             this.isConnected = false;
+            this.appInstance = null;
             console.log('Disconnected from background.');
         }
     }
 
     reconnect() {
+        this.disconnect();
         if (this.retries < this.maxRetries) {
             const delay = Math.min(1000 * Math.pow(2, this.retries), 10000); // Exponential backoff
 
@@ -133,11 +136,12 @@ export class AppDevtoolsConnection {
                 this.appInstance.postMessage(message);
             } catch (error) {
                 console.error('Failed to send message:', error);
+                this.reconnect();
             }
         } else {
             console.error('Not connected. Cannot send message.');
             // Try to connect when connection was lost and onDisconnect is not fiered
-            this.connect();
+            this.reconnect();
         }
     }
 }
