@@ -50,7 +50,7 @@ const WSProxy = ({ settings, setSettings, className }) => {
 
     const [isWSPJSerrorMessage, setWSPJSerrorMessage] = useState('');
 
-    const handleOnChange = (value) => {
+    const handleCodeOnChange = (value) => {
         setCode(value || '');
         setSettings((prev) => ({ ...prev, defaultWSPTemplate: value }))
     }
@@ -128,7 +128,7 @@ const WSProxy = ({ settings, setSettings, className }) => {
                             <div className='flex-row w-full text-center truncate'>{isWSPJSerrorMessage}</div>
                         </div>
                         <div className='flex-1 h-full overflow-y-scroll bg-material text-xs'>
-                            <CodeEditor value={code} onChange={handleOnChange} extensions={'javascript'} />
+                            <CodeEditor value={code} onChange={handleCodeOnChange} extensions={'javascript'} />
                         </div>
                     </div>
                 </Panel>

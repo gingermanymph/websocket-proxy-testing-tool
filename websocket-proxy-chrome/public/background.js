@@ -7,7 +7,6 @@
 
     // Waiting for appInspector connection
     chrome.runtime.onConnect.addListener(function (appInspectorChromePort) {
-        console.log(`[${appName}] got connection`, appInspectorChromePort);
         let appId;
 
         // Listen for messages from the appInspector.
@@ -20,7 +19,6 @@
 
                 appInspectorChromePort.onDisconnect.addListener(function () {
                     delete appInspectorChromePorts[appId];
-                    console.log(`[${appName}] onDisconnect`, appInspectorChromePorts)
                 });
             } else if (message.from === 'devtools') {
                 // all other messages from appInspector are 
