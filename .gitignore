@@ -24,4 +24,9 @@ dist-ssr
 *.sw?
 
 package-lock.json
+tests
 test*.jsx
+test*.html
+.vscode
+TODO
+*.zip
