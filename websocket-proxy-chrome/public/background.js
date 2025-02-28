@@ -4,6 +4,47 @@
     console.log(`[${appName}] loaded`);
 
     let appInspectorChromePorts = {};
+    let activeConnections = new Set();
+
+    function generateConnectionsTooltip() {
+        return activeConnections.size > 0 ? `Websocket Proxy\n\nActive connections:\n${[...activeConnections].join("\n")}\n`
+            : "Websocket Proxy\n\nNo active connections";
+    }
+
+    function setActionTitle(tabId) {
+        void chrome.action.setTitle({
+            tabId: tabId,
+            title: generateConnectionsTooltip()
+        });
+    }
+
+    function updateTabAction(tabId) {
+        void chrome.action.enable(tabId);
+        void chrome.action.setIcon({
+            tabId,
+            path: {
+                "16": "icons/a-16.png",
+                "32": "icons/a-32.png",
+                "64": "icons/a-64.png",
+                "128": "icons/a-128.png"
+            }
+        });
+        setActionTitle(tabId);
+    };
+
+    function resetAction(tabId) {
+        void chrome.action.disable(tabId);
+        void chrome.action.setIcon({
+            tabId,
+            path: {
+                "16": "icons/i-16.png",
+                "32": "icons/i-32.png",
+                "64": "icons/i-64.png",
+                "128": "icons/i-128.png"
+            }
+        });
+        setActionTitle(tabId);
+    }
 
     // Waiting for appInspector connection
     chrome.runtime.onConnect.addListener(function (appInspectorChromePort) {
@@ -42,6 +83,34 @@
             if (appInspectorChromePort) {
                 appInspectorChromePort.postMessage(request)
             }
+
+            try {
+                if (request.type) {
+                    let url = new URL(request.value.wspData.currentTarget);
+                    if (request.type === 'wsp-connect') {
+                        activeConnections.add(url.host);
+                        updateTabAction(sender.tab.id, url.host);
+                    }
+
+                    if (request.type === 'wsp-disconnect') {
+                        activeConnections.delete(url.host);
+                        if (activeConnections.size > 0) {
+                            updateTabAction(sender.tab.id, url.host);
+                        } else {
+                            resetAction(sender.tab.id);
+                        }
+                    }
+                }
+            } catch (error) {
+                // nope
+            }
+        }
+    });
+
+    chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+        if (changeInfo.status === 'complete') {
+            activeConnections.clear();
+            resetAction(tabId);
         }
     });
 })();

@@ -1,7 +1,7 @@
 {
     "name": "WebSocket Proxy",
     "version": "1.0.0",
-    "description":"Monitor, log, and modify WebSocket messages in real-time with a powerful proxy and testing tool.",
+    "description": "Monitor, log, and modify WebSocket messages in real-time with a powerful proxy and testing tool.",
     "permissions": [
         "storage"
     ],
@@ -39,6 +39,14 @@
         "32": "icons/i-32.png",
         "64": "icons/i-64.png",
         "128": "icons/i-128.png"
+    },
+    "action": {
+        "default_icon": { 
+            "16": "icons/i-16.png",
+            "32": "icons/i-32.png",
+            "64": "icons/i-64.png",
+            "128": "icons/i-128.png"
+        }
     },
     "devtools_page": "devtools.html",
     "manifest_version": 3
