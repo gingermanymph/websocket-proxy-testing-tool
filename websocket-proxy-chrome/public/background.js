@@ -107,6 +107,7 @@
         }
     });
 
+    // Hmm, this is not solid way to indicate when ws is closed ....
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         if (changeInfo.status === 'complete') {
             activeConnections.clear();
