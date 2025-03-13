@@ -43,7 +43,12 @@
                         } else if (wspData.data instanceof Blob) {
                             // If the data is a Blob, read it as text
                             wspData.data = await wspData.data.text();
-                        } else if (wspData.binaryType === 'arraybuffer' && wspData.data instanceof ArrayBuffer) {
+                        } else if (wspData.binaryType === 'arraybuffer') { 
+                            // 08.03.24
+                            // && wspData.data instanceof ArrayBuffer
+                            // For some reasone I added check for instanceof ArrayBuffer, it leads to crashing app without processing as expected
+                            // Removed for testing
+
                             // convert arrayBuffer into typed arrays to pass it via chrome.runtime.sendMessage
                             // convert arrayBuffer into ONE typed array
                             wspData.data = getCompatibleTypedArray(wspData.data); // getAllCompatibleTypedArrays(wspData.data);

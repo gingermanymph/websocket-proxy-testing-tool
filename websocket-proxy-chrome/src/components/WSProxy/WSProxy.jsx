@@ -80,7 +80,10 @@ const WSProxy = ({ settings, setSettings, className }) => {
         // TODO: if error then show popup
         if (message.from === pageClient && message.type === 'wsp-code-error') {
             setWSPJSerrorMessage(message.value.split('\n')[0]);
-            handleStop();
+            // 08.03.24
+            // Infinity loop apepars when "EvalError: Refused to evaluate a string"
+            // Need to rework run/stop code, send mesasge run/stop after code is sent
+            // handleStop();
         }
 
         if (message.from === pageClient && Object.hasOwn(message.value, 'wspData')) {
